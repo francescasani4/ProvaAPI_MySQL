@@ -1,4 +1,6 @@
 ﻿using System;
+using ProvaAPI_MySQL.Entity;
+
 namespace ProvaAPI_MySQL.Database
 {
 	public class UserRepository

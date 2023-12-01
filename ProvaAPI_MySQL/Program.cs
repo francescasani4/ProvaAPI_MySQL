@@ -21,7 +21,6 @@ builder.Services.AddDbContext<MyDbContext>(options =>
 // Permette di aggiungere degli scopi 
 builder.Services.AddScoped<UserRepository>();
 builder.Services.AddScoped<BookRepository>();
-builder.Services.AddSingleton<FakeDatabase>();
 
 var app = builder.Build();
 

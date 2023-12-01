@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ProvaAPI_MySQL.Database;
+using ProvaAPI_MySQL.Entity;
 using ProvaAPI_MySQL.Model;
 using ProvaAPI_MySQL.Model.Request;
 

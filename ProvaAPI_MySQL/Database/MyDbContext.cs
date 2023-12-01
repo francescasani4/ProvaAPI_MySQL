@@ -1,15 +1,16 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+using ProvaAPI_MySQL.Entity;
 
 namespace ProvaAPI_MySQL.Database
 {
-	public class MyDbContext : DbContext
-	{
-        public readonly FakeDatabase _fakeDatabase;
 
-        public MyDbContext(DbContextOptions<MyDbContext> options, FakeDatabase fakeDatabase) : base(options)
+    public class MyDbContext : DbContext
+	{
+        public MyDbContext(DbContextOptions<MyDbContext> options) : base(options)
         {
-            _fakeDatabase = fakeDatabase;
         }
 
         public DbSet<UserEntity> Users { get; set; }
