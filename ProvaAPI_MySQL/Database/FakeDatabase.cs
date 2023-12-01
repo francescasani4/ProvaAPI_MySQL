@@ -1,8 +1,13 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace ProvaAPI_MySQL.Database
 {
+    [Table("user")]
     public class UserEntity
     {
+        [Key]
         public int IdUser { get; set; }
 
         public string UserName { get; set; }
@@ -14,8 +19,10 @@ namespace ProvaAPI_MySQL.Database
         public string Surname { get; set; }
     }
 
+    [Table("book")]
     public class BookEntity
     {
+        [Key]
         public int IdBook { get; set; }
 
         public string Title { get; set; }
