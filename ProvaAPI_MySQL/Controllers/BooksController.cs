@@ -45,6 +45,9 @@ namespace ProvaAPI_MySQL.Controllers
                 List<BookEntity> allBooks = _bookRepository.GetAllBooks();
                 List<BookModel> bk = allBooks.Select(MapBookEntityToBookModel).ToList();
 
+                if (bk.Count == 0)
+                    return NotFound();
+
                 return Ok(bk);
             }
             else if (title != null && author == null)
@@ -99,11 +102,14 @@ namespace ProvaAPI_MySQL.Controllers
 
         [HttpPut]
         [Route("{idBook}")]
-        public IActionResult UpdateBook([FromBody] BookEntity book)
+        public IActionResult UpdateBook([FromBody] BookEntity book, int idBook)
         {
-            bool result = _bookRepository.UpdateBook(book);
+            bool result = _bookRepository.UpdateBook(book, idBook);
 
-            return Ok(book);
+            if (!result)
+                return NotFound();
+
+            return Ok(idBook);
         }
 
         [HttpDelete]

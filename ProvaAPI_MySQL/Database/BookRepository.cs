@@ -73,26 +73,31 @@ namespace ProvaAPI_MySQL.Database
             return flag;
         }
 
-        public bool UpdateBook(BookEntity book)
+        public bool UpdateBook(BookEntity book, int idBook)
         {
-            var existingBook = _dbContext.Books.FirstOrDefault(b => b.IdBook == book.IdBook);
+            var existingBook = _dbContext.Books.FirstOrDefault(b => b.IdBook == idBook);
             bool flag = false;
 
-            if (existingBook != null) //&& existingUser != null)
+            if (existingBook != null)
             {
                 existingBook.Title = book.Title;
                 existingBook.Author = book.Author;
                 existingBook.PublicationDate = book.PublicationDate;
 
-                if (book.IdUser != null)
+                if (book.IdUser != 0)
                 {
                     var existingUser = _dbContext.Users.FirstOrDefault(u => u.IdUser == book.IdUser); //controllo se l'id dell'utente esiste
 
-                    if (existingUser != null)
-                        flag = true;
+                    if (existingUser == null)
+                        return false;
+
+                    existingBook.IdUser = book.IdUser;
+                }
+                else
+                {
+                    existingBook.IdUser = null;
                 }
 
-                existingBook.IdUser = book.IdUser;
                 flag = true;
 
                 _dbContext.SaveChanges();

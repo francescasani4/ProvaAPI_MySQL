@@ -59,9 +59,10 @@ namespace ProvaAPI_MySQL.Database
             return flag;
         }
 
-        public void UpdateUser(UserEntity user)
+        public bool UpdateUser(UserEntity user, int idUser)
         {
-            var existingUser = _dbContext.Users.FirstOrDefault(u => u.IdUser == user.IdUser);
+            var existingUser = _dbContext.Users.FirstOrDefault(u => u.IdUser == idUser);
+            bool flag = false;
 
             if (existingUser != null)
             {
@@ -70,8 +71,12 @@ namespace ProvaAPI_MySQL.Database
                 existingUser.Name = user.Name;
                 existingUser.Surname = user.Surname;
 
+                flag = true;
+
                 _dbContext.SaveChanges();
             }
+
+            return flag;
         }
     }
 }

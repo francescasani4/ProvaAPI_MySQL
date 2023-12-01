@@ -45,6 +45,9 @@ namespace ProvaAPI_MySQL.Controllers
                 List<UserEntity> allUsers = _userRepository.GetAllUsers();
                 List<UserModel> us = allUsers.Select(MapUserEntityToUserModel).ToList();
 
+                if (us.Count == 0)
+                    return NotFound();
+
                 return Ok(us);
             }
 
@@ -78,11 +81,14 @@ namespace ProvaAPI_MySQL.Controllers
 
         [HttpPut]
         [Route("{idUser}")]
-        public IActionResult UpdateUser([FromBody] UserEntity user)
+        public IActionResult UpdateUser([FromBody] UserEntity user, int idUser)
         {
-            _userRepository.UpdateUser(user);
+            bool result = _userRepository.UpdateUser(user, idUser);
 
-            return Ok(user);
+            if (!result)
+                return NotFound();
+
+            return Ok(idUser);
         }
 
         [HttpDelete]
