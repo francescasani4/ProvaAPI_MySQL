@@ -17,6 +17,8 @@ namespace ProvaAPI_MySQL.Entity
         public DateTime PublicationDate { get; set; }
 
         public int? IdUser { get; set; }
+
+        public UserEntity? User { get; set; }
     }
 }
 

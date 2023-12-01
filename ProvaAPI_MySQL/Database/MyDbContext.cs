@@ -37,6 +37,11 @@ namespace ProvaAPI_MySQL.Database
                 entity.Property(e => e.PublicationDate).HasColumnType("datetime");
                 entity.Property(e => e.IdUser).HasColumnType("int(10)");
 
+                entity.HasOne(e => e.User)
+                    .WithMany()
+                    .HasForeignKey(e => e.IdUser)
+                    .IsRequired(false);
+
             });
 
             base.OnModelCreating(modelBuilder);
